@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font: 14px system-ui, sans-serif; width: 240px; margin: 0; padding: 14px; color: #222; }
+    h1 { font-size: 15px; margin: 0 0 10px; }
+    label { display: flex; align-items: center; gap: 8px; margin: 8px 0; cursor: pointer; }
+    select { width: 100%; padding: 4px; }
+    .row { margin: 10px 0; }
+    .site { font-size: 12px; color: #666; word-break: break-all; }
+    a { color: #0645ad; font-size: 12px; }
+    hr { border: 0; border-top: 1px solid #ddd; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>MuteTrump</h1>
+  <label><input type="checkbox" id="enabled"> Enabled everywhere</label>
+  <div class="row">
+    <select id="mode">
+      <option value="redact">Redact the words</option>
+      <option value="blur">Blur the block</option>
+      <option value="hide">Hide the block</option>
+    </select>
+  </div>
+  <hr>
+  <label><input type="checkbox" id="siteOff"> Pause on this site</label>
+  <div class="site" id="host"></div>
+  <hr>
+  <a href="#" id="options">More options…</a>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[data-mutetrump="hide"] {
+  display: none !important;
+}
+
+[data-mutetrump="blur"] {
+  filter: blur(8px) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+[data-mutetrump="blur"] img,
+[data-mutetrump="blur"] video {
+  filter: blur(20px) !important;
+}

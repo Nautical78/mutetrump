@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MuteTrump options</title>
+  <style>
+    body { font: 15px system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #222; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 16px; margin-top: 28px; }
+    label { display: block; margin: 10px 0 4px; font-weight: 600; }
+    input[type=text], textarea, select { width: 100%; box-sizing: border-box; padding: 8px; font: inherit; }
+    textarea { height: 140px; font-family: ui-monospace, monospace; font-size: 13px; }
+    .hint { color: #666; font-size: 13px; margin-top: 4px; }
+    button { margin-top: 20px; padding: 10px 18px; font: inherit; cursor: pointer; }
+    #status { margin-left: 12px; color: #080; }
+    .test { margin-top: 10px; padding: 10px; background: #f4f4f4; border-radius: 6px; min-height: 1.5em; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>MuteTrump options</h1>
+
+  <label for="mode">What to do with a match</label>
+  <select id="mode">
+    <option value="redact">Replace the matching words with a placeholder</option>
+    <option value="blur">Blur the whole post / paragraph / headline</option>
+    <option value="hide">Remove the whole post / paragraph / headline</option>
+  </select>
+
+  <label for="replacement">Placeholder text (redact mode)</label>
+  <input type="text" id="replacement">
+
+  <h2>Extra terms</h2>
+  <label for="userPatterns">One per line (plain words or regular expressions, case-insensitive)</label>
+  <textarea id="userPatterns" placeholder="e.g.&#10;ivanka&#10;\bjd vance\b"></textarea>
+  <div class="hint">The built-in list is in <code>terms.js</code>. Your additions are stored in browser sync storage.</div>
+
+  <h2>Paused sites</h2>
+  <label for="disabledSites">One hostname per line</label>
+  <textarea id="disabledSites" placeholder="example.com"></textarea>
+
+  <h2>Try it</h2>
+  <input type="text" id="testIn" placeholder="Type a sentence to see what happens to it">
+  <div class="test" id="testOut"></div>
+
+  <button id="save">Save</button><span id="status"></span>
+
+  <script src="terms.js"></script>
+  <script src="filter.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "MuteTrump",
+  "version": "0.1.0",
+  "description": "Redacts, blurs, or hides any mention of Donald Trump on every web page.",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["terms.js", "filter.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mutetrump@example.org",
+      "strict_min_version": "109.0"
+    }
+  }
+}
