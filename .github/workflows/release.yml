@@ -1,0 +1,43 @@
+name: Release
+
+# Runs whenever a release is published on GitHub (Releases → Draft a new release → Publish).
+# It builds the two zips and attaches them to that release automatically.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the JavaScript parses
+        run: for f in extension/*.js; do node --check "$f"; done
+
+      - name: Build Chromium zip
+        run: |
+          mkdir -p build/chromium
+          cp -r extension/. build/chromium/
+          # Strip the Firefox-only key so Chrome doesn't warn about it
+          python3 - <<'EOF'
+          import json
+          p = "build/chromium/manifest.json"
+          m = json.load(open(p)); m.pop("browser_specific_settings", None)
+          json.dump(m, open(p, "w"), indent=2)
+          EOF
+          cd build/chromium && zip -r ../../mutetrump-chromium.zip .
+
+      - name: Build Firefox zip
+        run: cd extension && zip -r ../mutetrump-firefox.zip .
+
+      - name: Attach zips to the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            mutetrump-chromium.zip
+            mutetrump-firefox.zip
